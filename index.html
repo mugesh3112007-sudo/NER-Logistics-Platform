@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NER LogiSmart — AI-Powered Logistics Intelligence Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <h2>NER LogiSmart</h2>
+            <p>Initializing AI Logistics Engine...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <i class="fas fa-route"></i>
+                <span>NER <strong>LogiSmart</strong></span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" class="active">Home</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#live-map">Live Map</a></li>
+                <li><a href="#route-optimizer">Route AI</a></li>
+                <li><a href="#tracking">Tracking</a></li>
+                <li><a href="#alerts">Alerts</a></li>
+                <li><a href="#field-reports">Field Reports</a></li>
+                <li><a href="#features">Features</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-lang" id="langToggle" title="Switch Language">
+                    <i class="fas fa-language"></i> EN
+                </button>
+                <button class="btn-notify" id="notifyBtn">
+                    <i class="fas fa-bell"></i>
+                    <span class="badge">5</span>
+                </button>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-satellite"></i> AI-Powered Logistics Intelligence
+            </div>
+            <h1>Smart Logistics for<br><span class="gradient-text">North East India</span></h1>
+            <p class="hero-subtitle">Real-time route monitoring, AI-powered disruption prediction, and intelligent logistics optimization for the North Eastern Region's most challenging terrains.</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="8">0</div>
+                    <div class="stat-label">NER States</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="127">0</div>
+                    <div class="stat-label">Districts Covered</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="2450">0</div>
+                    <div class="stat-label">Routes Monitored</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="94">0</div>
+                    <div class="stat-label">% AI Accuracy</div>
+                </div>
+            </div>
+            <div class="hero-actions">
+                <a href="#dashboard" class="btn btn-primary"><i class="fas fa-chart-line"></i> Open Dashboard</a>
+                <a href="#live-map" class="btn btn-outline"><i class="fas fa-map-marked-alt"></i> View Live Map</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card card-1">
+                <i class="fas fa-road"></i>
+                <span>NH-37 Clear</span>
+                <div class="status-dot green"></div>
+            </div>
+            <div class="floating-card card-2">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Landslide Alert</span>
+                <div class="status-dot red"></div>
+            </div>
+            <div class="floating-card card-3">
+                <i class="fas fa-truck"></i>
+                <span>12 Vehicles Active</span>
+                <div class="status-dot blue"></div>
+            </div>
+            <div class="floating-card card-4">
+                <i class="fas fa-cloud-rain"></i>
+                <span>Heavy Rain — Meghalaya</span>
+                <div class="status-dot orange"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="section dashboard-section" id="dashboard">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge"><i class="fas fa-th-large"></i> Central Command</span>
+                <h2>Logistics Intelligence Dashboard</h2>
+                <p>Real-time overview of connectivity, supply chain status, and disruption alerts across all 8 NER states</p>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon green"><i class="fas fa-road"></i></div>
+                    <div class="kpi-info">
+                        <h3 id="kpiAccessible">1,847</h3>
+                        <p>Routes Accessible</p>
+                    </div>
+                    <div class="kpi-trend up"><i class="fas fa-arrow-up"></i> 3.2%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon red"><i class="fas fa-ban"></i></div>
+                    <div class="kpi-info">
+                        <h3 id="kpiBlocked">43</h3>
+                        <p>Routes Blocked</p>
+                    </div>
+                    <div class="kpi-trend down"><i class="fas fa-arrow-down"></i> 12.5%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon blue"><i class="fas fa-truck-moving"></i></div>
+                    <div class="kpi-info">
+                        <h3 id="kpiVehicles">284</h3>
+                        <p>Vehicles Active</p>
+                    </div>
+                    <div class="kpi-trend up"><i class="fas fa-arrow-up"></i> 8.7%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon orange"><i class="fas fa-exclamation-circle"></i></div>
+                    <div class="kpi-info">
+                        <h3 id="kpiAlerts">17</h3>
+                        <p>Active Alerts</p>
+                    </div>
+                    <div class="kpi-trend down"><i class="fas fa-arrow-down"></i> 5.1%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon purple"><i class="fas fa-boxes-stacked"></i></div>
+                    <div class="kpi-info">
+                        <h3 id="kpiDeliveries">1,203</h3>
+                        <p>Deliveries Today</p>
+                    </div>
+                    <div class="kpi-trend up"><i class="fas fa-arrow-up"></i> 15.3%</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-icon teal"><i class="fas fa-clock"></i></div>
+                    <div class="kpi-info">
+                        <h3 id="kpiAvgDelay">2.4h</h3>
+                        <p>Avg Delay</p>
+                    </div>
+                    <div class="kpi-trend down"><i class="fas fa-arrow-down"></i> 22%</div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-bar"></i> District-wise Connectivity Status</h3>
+                        <select id="stateFilter" class="filter-select">
+                            <option value="all">All NER States</option>
+                            <option value="assam">Assam</option>
+                            <option value="meghalaya">Meghalaya</option>
+                            <option value="arunachal">Arunachal Pradesh</option>
+                            <option value="nagaland">Nagaland</option>
+                            <option value="manipur">Manipur</option>
+                            <option value="mizoram">Mizoram</option>
+                            <option value="tripura">Tripura</option>
+                            <option value="sikkim">Sikkim</option>
+                        </select>
+                    </div>
+                    <canvas id="connectivityChart" height="280"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-pie"></i> Supply Chain Distribution</h3>
+                    </div>
+                    <canvas id="supplyChart" height="280"></canvas>
+                </div>
+            </div>
+
+            <div class="charts-grid">
+                <div class="chart-card wide">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-line"></i> Disruption Trends — Last 30 Days</h3>
+                        <div class="chart-legend">
+                            <span class="legend-item"><span class="dot red"></span> Landslides</span>
+                            <span class="legend-item"><span class="dot blue"></span> Floods</span>
+                            <span class="legend-item"><span class="dot orange"></span> Road Damage</span>
+                            <span class="legend-item"><span class="dot gray"></span> Congestion</span>
+                        </div>
+                    </div>
+                    <canvas id="disruptionChart" height="200"></canvas>
+                </div>
+            </div>
+
+            <!-- State Status Table -->
+            <div class="table-card">
+                <div class="chart-header">
+                    <h3><i class="fas fa-table"></i> State-wise Logistics Summary</h3>
+                    <button class="btn btn-sm btn-outline"><i class="fas fa-download"></i> Export</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table" id="stateTable">
+                        <thead>
+                            <tr>
+                                <th>State</th>
+                                <th>Districts</th>
+                                <th>Routes Monitored</th>
+                                <th>Accessible</th>
+                                <th>Blocked</th>
+                                <th>Vehicles Active</th>
+                                <th>Connectivity</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Map Section -->
+    <section class="section map-section" id="live-map">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge"><i class="fas fa-satellite-dish"></i> GIS Intelligence</span>
+                <h2>Real-Time Accessibility Map</h2>
+                <p>Live monitoring of roads, bridges, and transport networks across NER with AI-powered disruption overlays</p>
+            </div>
+            <div class="map-wrapper">
+                <div class="map-controls">
+                    <div class="map-filter-group">
+                        <button class="map-filter active" data-layer="routes"><i class="fas fa-road"></i> Routes</button>
+                        <button class="map-filter" data-layer="vehicles"><i class="fas fa-truck"></i> Vehicles</button>
+                        <button class="map-filter" data-layer="alerts"><i class="fas fa-exclamation-triangle"></i> Alerts</button>
+                        <button class="map-filter" data-layer="weather"><i class="fas fa-cloud"></i> Weather</button>
+                        <button class="map-filter" data-layer="bridges"><i class="fas fa-archway"></i> Bridges</button>
+                    </div>
+                    <div class="map-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search district, route, or location..." id="mapSearch">
+                    </div>
+                </div>
+                <div id="nerMap" class="live-map"></div>
+                <div class="map-legend">
+                    <h4>Legend</h4>
+                    <div class="legend-items">
+                        <span><span class="line green"></span> Accessible Route</span>
+                        <span><span class="line orange"></span> Partially Blocked</span>
+                        <span><span class="line red"></span> Fully Blocked</span>
+                        <span><span class="dot-lg blue"></span> Active Vehicle</span>
+                        <span><span class="dot-lg yellow"></span> Weather Alert</span>
+                        <span><span class="dot-lg purple"></span> Field Report</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Route Optimizer Section -->
+    <section class="section optimizer-section" id="route-optimizer">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge"><i class="fas fa-brain"></i> AI Engine</span>
+                <h2>AI Route Prediction & Optimization</h2>
+                <p>ML-powered route analysis with real-time weather, terrain, and disruption data for optimal logistics planning</p>
+            </div>
+            <div class="optimizer-grid">
+                <div class="optimizer-form">
+                    <h3><i class="fas fa-route"></i> Plan Your Route</h3>
+                    <div class="form-group">
+                        <label><i class="fas fa-map-pin"></i> Origin</label>
+                        <select id="routeOrigin" class="form-select">
+                            <option value="">Select origin...</option>
+                            <option value="guwahati">Guwahati, Assam</option>
+                            <option value="shillong">Shillong, Meghalaya</option>
+                            <option value="imphal">Imphal, Manipur</option>
+                            <option value="agartala">Agartala, Tripura</option>
+                            <option value="itanagar">Itanagar, Arunachal Pradesh</option>
+                            <option value="kohima">Kohima, Nagaland</option>
+                            <option value="aizawl">Aizawl, Mizoram</option>
+                            <option value="gangtok">Gangtok, Sikkim</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-flag-checkered"></i> Destination</label>
+                        <select id="routeDest" class="form-select">
+                            <option value="">Select destination...</option>
+                            <option value="tawang">Tawang, Arunachal Pradesh</option>
+                            <option value="dimapur">Dimapur, Nagaland</option>
+                            <option value="silchar">Silchar, Assam</option>
+                            <option value="tura">Tura, Meghalaya</option>
+                            <option value="churachandpur">Churachandpur, Manipur</option>
+                            <option value="lunglei">Lunglei, Mizoram</option>
+                            <option value="dharmanagar">Dharmanagar, Tripura</option>
+                            <option value="namchi">Namchi, Sikkim</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-box"></i> Cargo Type</label>
+                        <select id="cargoType" class="form-select">
+                            <option value="general">General Goods</option>
+                            <option value="medicine">Medicines & Medical Supplies</option>
+                            <option value="food">Food & Perishables</option>
+                            <option value="construction">Construction Materials</option>
+                            <option value="agriculture">Agricultural Produce</option>
+                            <option value="fuel">Fuel & Petroleum</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-truck"></i> Vehicle Type</label>
+                        <select id="vehicleType" class="form-select">
+                            <option value="heavy">Heavy Truck (16T+)</option>
+                            <option value="medium">Medium Truck (7-16T)</option>
+                            <option value="light">Light Commercial (3.5-7T)</option>
+                            <option value="pickup">Pickup / Mini Truck</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary full-width" id="optimizeBtn">
+                        <i class="fas fa-magic"></i> Optimize Route with AI
+                    </button>
+                </div>
+
+                <div class="optimizer-results" id="optimizerResults">
+                    <div class="result-placeholder">
+                        <i class="fas fa-route"></i>
+                        <h4>Select origin & destination</h4>
+                        <p>AI will analyze terrain, weather, road conditions, and traffic to suggest the best route</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehicle Tracking Section -->
+    <section class="section tracking-section" id="tracking">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge"><i class="fas fa-satellite"></i> GPS Tracking</span>
+                <h2>Vehicle & Commodity Tracking</h2>
+                <p>Real-time GPS tracking of vehicles carrying essential goods across the North Eastern Region</p>
+            </div>
+            <div class="tracking-grid">
+                <div class="tracking-sidebar">
+                    <div class="tracking-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search vehicle ID..." id="vehicleSearch">
+                    </div>
+                    <div class="tracking-filters">
+                        <button class="track-filter active" data-status="all">All <span class="count">284</span></button>
+                        <button class="track-filter" data-status="moving">Moving <span class="count">198</span></button>
+                        <button class="track-filter" data-status="stopped">Stopped <span class="count">52</span></button>
+                        <button class="track-filter" data-status="delayed">Delayed <span class="count">34</span></button>
+                    </div>
+                    <div class="vehicle-list" id="vehicleList"></div>
+                </div>
+                <div class="tracking-detail" id="trackingDetail">
+                    <div class="detail-placeholder">
+                        <i class="fas fa-truck"></i>
+                        <h4>Select a vehicle to view details</h4>
+                        <p>GPS location, cargo info, route progress, and estimated delivery time</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alerts Section -->
+    <section class="section alerts-section" id="alerts">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge"><i class="fas fa-bell"></i> Alert System</span>
+                <h2>Real-Time Disruption Alerts</h2>
+                <p>AI-generated alerts for road blockages, weather hazards, landslides, and supply chain disruptions</p>
+            </div>
+            <div class="alerts-grid">
+                <div class="alert-filters">
+                    <button class="alert-filter active" data-type="all"><i class="fas fa-globe"></i> All</button>
+                    <button class="alert-filter" data-type="landslide"><i class="fas fa-mountain"></i> Landslide</button>
+                    <button class="alert-filter" data-type="flood"><i class="fas fa-water"></i> Flood</button>
+                    <button class="alert-filter" data-type="road"><i class="fas fa-road"></i> Road Damage</button>
+                    <button class="alert-filter" data-type="weather"><i class="fas fa-cloud-showers-heavy"></i> Weather</button>
+                    <button class="alert-filter" data-type="traffic"><i class="fas fa-traffic-light"></i> Traffic</button>
+                </div>
+                <div class="alerts-list" id="alertsList"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Field Reports Section -->
+    <section class="section reports-section" id="field-reports">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge"><i class="fas fa-clipboard-list"></i> Field Intelligence</span>
+                <h2>Geo-Tagged Field Reports</h2>
+                <p>Field officials and local authorities can upload incident reports, photos, and ground-level updates from remote locations</p>
+            </div>
+            <div class="reports-grid">
+                <div class="report-form-card">
+                    <h3><i class="fas fa-plus-circle"></i> Submit New Report</h3>
+                    <form id="fieldReportForm">
+                        <div class="form-group">
+                            <label>Report Type</label>
+                            <select class="form-select" id="reportType">
+                                <option value="road_block">Road Blockage</option>
+                                <option value="landslide">Landslide</option>
+                                <option value="flood">Flooding</option>
+                                <option value="bridge_damage">Bridge Damage</option>
+                                <option value="road_condition">Poor Road Condition</option>
+                                <option value="supply_shortage">Supply Shortage</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <div class="location-input">
+                                <input type="text" placeholder="Enter location or use GPS" id="reportLocation">
+                                <button type="button" class="btn-icon" id="gpsBtn"><i class="fas fa-crosshairs"></i></button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Latitude</label>
+                                <input type="text" id="reportLat" placeholder="Auto-detected">
+                            </div>
+                            <div class="form-group">
+                                <label>Longitude</label>
+                                <input type="text" id="reportLng" placeholder="Auto-detected">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Severity</label>
+                            <div class="severity-selector">
+                                <label class="severity-option"><input type="radio" name="severity" value="low" checked><span class="sev-badge low">Low</span></label>
+                                <label class="severity-option"><input type="radio" name="severity" value="moderate"><span class="sev-badge moderate">Moderate</span></label>
+                                <label class="severity-option"><input type="radio" name="severity" value="high"><span class="sev-badge high">High</span></label>
+                                <label class="severity-option"><input type="radio" name="severity" value="critical"><span class="sev-badge critical">Critical</span></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea placeholder="Describe the incident in detail..." id="reportDesc" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Upload Photos</label>
+                            <div class="upload-zone" id="uploadZone">
+                                <i class="fas fa-camera"></i>
+                                <p>Drag photos here or <span>browse</span></p>
+                                <input type="file" id="photoUpload" multiple accept="image/*" hidden>
+                            </div>
+                            <div class="upload-preview" id="uploadPreview"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width">
+                            <i class="fas fa-paper-plane"></i> Submit Report
+                        </button>
+                    </form>
+                </div>
+                <div class="recent-reports">
+                    <h3><i class="fas fa-history"></i> Recent Field Reports</h3>
+                    <div class="reports-list" id="reportsList"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge"><i class="fas fa-star"></i> Platform Capabilities</span>
+                <h2>Comprehensive Feature Set</h2>
+                <p>End-to-end logistics intelligence built for the unique challenges of North East India</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-brain"></i></div>
+                    <h3>AI Route Prediction</h3>
+                    <p>ML-powered engine predicts disruptions and suggests optimal alternate routes based on terrain, weather, and historical data</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <h3>GIS Accessibility Monitoring</h3>
+                    <p>Real-time road, bridge, and transport accessibility monitoring across all NER districts with interactive mapping</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-satellite-dish"></i></div>
+                    <h3>GPS Vehicle Tracking</h3>
+                    <p>Track essential commodity vehicles in real-time — medicines, food, construction materials, agricultural produce</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-bell"></i></div>
+                    <h3>Automated Alert System</h3>
+                    <p>Instant alerts for blocked roads, inaccessible regions, delayed deliveries, and high-risk transport corridors</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-camera"></i></div>
+                    <h3>Geo-Tagged Field Reports</h3>
+                    <p>Field officials upload photos, incident reports, and ground updates from remote locations with GPS tagging</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>District-wise connectivity, logistics bottlenecks, supply chain gaps, and emergency route visualization</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-language"></i></div>
+                    <h3>Multilingual Support</h3>
+                    <p>Notifications and interface in English, Hindi, Assamese, Bengali, and other regional languages</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-wifi"></i></div>
+                    <h3>Offline Sync</h3>
+                    <p>Works in low-network areas — data syncs automatically when connectivity is restored. Built for remote NER terrain</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-cloud"></i></div>
+                    <h3>Weather API Integration</h3>
+                    <p>Live weather data integration for rainfall, flood risk, and visibility prediction along transport corridors</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Emergency Response</h3>
+                    <p>Disaster-time accessibility routes, emergency supply prioritization, and rapid response coordination</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-server"></i></div>
+                    <h3>Cloud Infrastructure</h3>
+                    <p>Scalable cloud-based platform with secure data management, API integration, and government system connectivity</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <h3>Mobile App Ready</h3>
+                    <p>Responsive design with mobile-first approach for field-level reporting and monitoring on any device</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="section tech-section" id="tech">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge"><i class="fas fa-cogs"></i> Architecture</span>
+                <h2>Technology Stack</h2>
+            </div>
+            <div class="tech-pipeline">
+                <div class="pipeline-step">
+                    <div class="pipe-icon"><i class="fas fa-database"></i></div>
+                    <h4>Data Ingestion</h4>
+                    <p>Weather APIs, GPS feeds, satellite imagery, field reports</p>
+                </div>
+                <div class="pipe-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="pipe-icon"><i class="fas fa-brain"></i></div>
+                    <h4>AI / ML Engine</h4>
+                    <p>Route prediction, disruption classification, risk scoring</p>
+                </div>
+                <div class="pipe-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="pipe-icon"><i class="fas fa-map"></i></div>
+                    <h4>GIS Processing</h4>
+                    <p>Spatial analysis, route mapping, accessibility overlay</p>
+                </div>
+                <div class="pipe-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="pipe-icon"><i class="fas fa-bell"></i></div>
+                    <h4>Alert & Notify</h4>
+                    <p>Real-time alerts, multilingual notifications, SMS/push</p>
+                </div>
+                <div class="pipe-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="pipeline-step">
+                    <div class="pipe-icon"><i class="fas fa-desktop"></i></div>
+                    <h4>Dashboard</h4>
+                    <p>Interactive visualization, reporting, analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3><i class="fas fa-route"></i> NER LogiSmart</h3>
+                    <p>AI-Powered Smart Logistics & Accessibility Intelligence Platform for the North Eastern Region of India</p>
+                    <p class="footer-ps">Problem Statement ID: <strong>SIH26002</strong></p>
+                </div>
+                <div class="footer-links">
+                    <h4>Platform</h4>
+                    <a href="#dashboard">Dashboard</a>
+                    <a href="#live-map">Live Map</a>
+                    <a href="#route-optimizer">Route AI</a>
+                    <a href="#tracking">Vehicle Tracking</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Features</h4>
+                    <a href="#alerts">Alert System</a>
+                    <a href="#field-reports">Field Reports</a>
+                    <a href="#features">All Features</a>
+                    <a href="#tech">Tech Stack</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <a href="#">API Documentation</a>
+                    <a href="#">Government Portal</a>
+                    <a href="#">Support</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 NER LogiSmart — Smart India Hackathon 2026 | SIH26002</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notifPanel">
+        <div class="notif-header">
+            <h3><i class="fas fa-bell"></i> Notifications</h3>
+            <button class="btn-close" id="closeNotif"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="notif-list" id="notifList"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
